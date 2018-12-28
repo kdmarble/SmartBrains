@@ -106,6 +106,12 @@ class App extends Component {
       .catch(err => console.log(err));
   }
 
+  handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+        this.onButtonSubmit();
+    }
+}
+
   onRouteChange = (route) => {
     if (route === 'signout') {
       this.setState(initialState)
@@ -125,7 +131,7 @@ class App extends Component {
         ? <div>   
           <Logo />
           <Rank name={this.state.user.name} entries={this.state.user.entries} />
-          <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit}/>
+          <ImageLinkForm onInputChange={this.onInputChange} onButtonSubmit={this.onButtonSubmit} handleKeyPress={this.handleKeyPress}/>
           <FaceRecognition box={box} imageUrl={imageUrl}/>
           </div>
         : (
