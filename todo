@@ -1,0 +1,2 @@
+- Error messages appear for split second when submitting valid form
+- Prevent invalid register form from posting
