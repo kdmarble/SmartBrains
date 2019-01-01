@@ -1,0 +1,2 @@
+- Alert user if registration already exists
+- Prevent invalid register form from posting
