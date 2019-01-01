@@ -1,2 +1,2 @@
-- Error messages appear for split second when submitting valid form
+- Alert user if registration already exists
 - Prevent invalid register form from posting
