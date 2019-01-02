@@ -9,8 +9,6 @@ class SignIn extends React.Component {
             signInPassword: '',
             errors: {},
             isFormValid: true,
-            isEmailValid: true,
-            isPasswordValid: true,
         }
     }
 
@@ -26,24 +24,20 @@ class SignIn extends React.Component {
         const { signInEmail, signInPassword } = this.state;
         let errors = {};
         let formIsValid = true;
-        let isEmailValid = true;
-        let isPasswordValid = true;
 
         // Email
         if(!signInEmail) {
             formIsValid = false;
-            isEmailValid = false;
             errors["email"] = "Cannot be empty";
         } 
 
         // Password
         else if(!signInPassword) {
             formIsValid = false;
-            isPasswordValid = false;
             errors["password"] = "Cannot be empty";
         }
 
-        this.setState({errors: errors, isFormValid: formIsValid, isEmailValid: isEmailValid, isPasswordValid: isPasswordValid});
+        this.setState({errors: errors, isFormValid: formIsValid});
     }
 
     onSubmitSignIn = (evt) => {
@@ -75,11 +69,10 @@ class SignIn extends React.Component {
     handleErrorDisplay = () => {
         const error = "w-90 ba br2 pa3 mt2 dark-red bg-washed-red center flex flex-column";
         const hidden = "style={display: none}";
-        switch (this.state.isFormValid) {
-            case false:
-                return error;
-            default:
-                return hidden;
+        if (this.state.isFormValid) {
+            return hidden
+        } else {
+            return error
         }
     }
 

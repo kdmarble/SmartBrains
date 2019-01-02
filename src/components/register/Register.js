@@ -10,9 +10,6 @@ class Register extends React.Component {
             name: '',
             errors: {},
             isFormValid: true,
-            isNameValid: true,
-            isEmailValid: true,
-            isPasswordValid: true
             }
         }
 
@@ -32,47 +29,39 @@ class Register extends React.Component {
         const { email, password, name } = this.state;
         let errors = {};
         let formIsValid = true;
-        let isNameValid = true;
-        let isEmailValid = true;
-        let isPasswordValid = true;
 
         //Name
         if(!name){
             formIsValid = false;
-            isPasswordValid = false;
             errors["name"] = "Cannot be empty";
         }
 
         else if(!email) {
             formIsValid = false;
-            isEmailValid = false;
             errors["email"] = "Cannot be empty";
         }
 
         else if(!password) {
             formIsValid = false;
-            isPasswordValid = false;
             errors["password"] = "Cannot be empty";
         }
         
         else if(typeof name !== "undefined"){
             if(!name.match(/^[a-zA-Z]+$/)){
             formIsValid = false;
-            isNameValid = false;
             errors["name"] = "Name can only contain letters";
             }      	
         
         else if(typeof password !== 'undefined') {
             if(password.length < 6) {
                 formIsValid = false;
-                isPasswordValid = false;
                 errors["password"] = "Password must be more than 6 characters long"
             }
         }
     
         }
 
-        this.setState({errors: errors, isFormValid: formIsValid, isEmailValid: isEmailValid, isPasswordValid: isPasswordValid, isNameValid: isNameValid});
+        this.setState({errors: errors, isFormValid: formIsValid});
     }
 
     onSubmitSignIn = () => {
@@ -105,11 +94,10 @@ class Register extends React.Component {
     handleErrorDisplay = () => {
         const error = "w-90 ba br2 pa3 mt2 dark-red bg-washed-red center flex flex-column";
         const hidden = "style={display: none}";
-        switch (this.state.isFormValid) {
-            case false:
-                return error;
-            default: 
-                return hidden;
+        if (this.state.isFormValid) {
+            return hidden
+        } else {
+            return error
         }
     }
 
